@@ -1,0 +1,8 @@
+*~
+*.a
+*.o
+*.pid
+*.log
+nohup.out
+var/*.sqlite3
+node_modules/

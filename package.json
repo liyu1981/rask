@@ -1,0 +1,17 @@
+{
+  "name": "Restify-based-web-app",
+  "description": "Restify based Web App",
+  "version": "1.0.0",
+  "engines": {
+    "node": "0.10.5",
+    "npm": "1.2.18"
+  },
+  "private": true,
+  "dependencies": {
+    "log4js": "~0.6.9",
+    "underscore": "~1.5.2",
+    "optimist": "~0.6.0",
+    "bunyan": "~0.22.0",
+    "restify": "2.6.0"
+  }
+}

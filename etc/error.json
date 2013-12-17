@@ -1,0 +1,10 @@
+{
+  "checkInstallDiskFail": {
+    "errno": "checkInstallDiskFail",
+    "message": "Check install disk image dir failed."
+  },
+  "applyOwncloudFailed": {
+    "errno": "",
+    "message": "Apply owncloud vm failed."
+  }
+}
