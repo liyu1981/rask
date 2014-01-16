@@ -1,3 +1,6 @@
+/*
+  Server configurations.
+ */
 {
   "bind_port": 12345,
   "session_handler": "sessionChecker",
