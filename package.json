@@ -1,6 +1,6 @@
 {
-  "name": "Restify-based-web-app",
-  "description": "Restify based Web App",
+  "name": "reskeleton",
+  "description": "My Web App skeleton framework based on restify.",
   "version": "1.0.0",
   "engines": {
     "node": "0.10.5",
