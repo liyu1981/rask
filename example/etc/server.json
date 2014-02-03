@@ -9,7 +9,7 @@
     "streams": [
       {
         "level": "error",
-        "path": "log/base-server-error.log"
+        "path": "./log/base-server-error.log"
       }
     ]
   },
