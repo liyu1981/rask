@@ -1,8 +1,16 @@
 // var reske = require('rask'); // Use this for real
-var reske = require('../lib/main.js');
-reske.server({
+var rask = require('../lib/main.js');
+rask.server({
     serveStatic: true
   })
-  .start(function(server) {
-    require('./apiServe').register(server);
-  });
+  .route(function(server) {
+      server.get('/hello', function(req, res, next) {
+          res.send(200, 'world');
+        });
+      server.get('/login', function(req, res, next) {
+          rask.session.createSession(res);
+          res.write('I\'m in.');
+          res.end();
+        });
+    })
+  .start();
