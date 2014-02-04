@@ -1,6 +1,6 @@
 {
-  "name": "reskeleton",
-  "description": "My Web App skeleton framework based on restify.",
+  "name": "rask",
+  "description": "My Restful App Skeleton framework.",
   "version": "1.0.0",
   "engines": {
     "node": "0.10.5",
