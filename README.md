@@ -6,7 +6,7 @@ This is my **r**estify-based **a**pp **sk**eleton framework. It bounds some comm
 Hey! Do you know there is another *great* framework out there?
 ===================================================
 
-Yes, but why bother there is another one? 
+Yes, but why bother there is another one?
 
 Since this one already setup following things
 
@@ -14,8 +14,9 @@ Since this one already setup following things
 2. Log4js
 3. Comment enhanced JSON conf files (auto parsing)
 4. Cookies and Session support
-5. Fully customizable static file serving  
+5. Fully customizable static file serving
 6. Ready to use client classes (enhanced restify client classes)
+7. Ready to use util classes: actionQueue & workflow
 
 Usage
 =====
@@ -39,7 +40,7 @@ App dir layout
 
 ```
 etc/      <= for JSON conf files
- + log.json       => access with rask.conf.get('log') 
+ + log.json       => access with rask.conf.get('log')
  + server.json    => access with rask.conf.get('server')
 log/      <= for log files (auto-create)
 main.js <= app main
