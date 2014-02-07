@@ -1,7 +1,7 @@
 About
 =====
 
-This is my *r*estify-based *a*pp *sk*eleton framework. It bounds some common frameworks and tools together, and gives (mostly me) us a production ready web app framework.
+This is my **r**estify-based **a**pp **sk**eleton framework. It bounds some common frameworks and tools together, and gives (mostly me) us a production ready web app framework.
 
 Hey! Do you know there is another *great* framework out there?
 ===================================================
