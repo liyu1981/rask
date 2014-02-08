@@ -17,6 +17,7 @@ Since this one already setup following things
 5. Fully customizable static file serving
 6. Ready to use client classes (enhanced restify client classes)
 7. Ready to use util classes: actionQueue & workflow
+8. WebSocket Server (with einaros/ws)
 
 Usage
 =====

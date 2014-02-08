@@ -1,7 +1,8 @@
 // var reske = require('rask'); // Use this for real
 var rask = require('../lib/main.js');
 rask.server({
-    serveStatic: true
+    serveStatic: true,
+    enableWebSocket: true
   })
   .route(function(server) {
       server.get('/hello', function(req, res, next) {
@@ -12,5 +13,17 @@ rask.server({
           res.write('I\'m in.');
           res.end();
         });
+    })
+  .wsRoute(function(wsServer) {
+      wsServer.on('connection', function(ws) {
+        var id = setInterval(function() {
+          ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ });
+        }, 1000);
+        console.log('started client interval');
+        ws.on('close', function() {
+          console.log('stopping client interval');
+          clearInterval(id);
+        });
+      });
     })
   .start();
