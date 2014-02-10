@@ -48,4 +48,47 @@ describe('simpleAndStaticServer', function() {
           });
     });
   });
+
+  describe('testSessionRedirect', function() {
+    var mysession = null;
+
+    it('should finish without error.', function(done) {
+      supertest(url)
+        .get('/index.html')
+        .expect(302, done);
+    });
+  });
+
+  describe('testSession', function() {
+    var mysession = null;
+
+    it('should finish without error.', function(done) {
+      supertest(url)
+        .get('/login')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) throw err;
+
+            var s = res.headers['set-cookie'];
+            for (var i=0; i<s.length; i++) {
+              if(/rask-session=/.test(s[i])) {
+                mysession = s[i];
+                break;
+              }
+            }
+            if (mysession === null) {
+              throw 'no session found.'
+            }
+
+            supertest(url)
+              .get('/index.html')
+              .set('Cookie', mysession)
+              .expect(200)
+              .end(function(err2, res2) {
+                  if (err2) throw err2;
+                  done();
+                });
+          });
+    });
+  });
 });

@@ -1,5 +1,5 @@
 {
-  "session_name": "myct-session",
+  "session_name": "rask-session",
   "default_session_lifetime_in_seconds": 7200,
   "check_period_in_seconds": 60,
   "fail_redirect": "/login"
