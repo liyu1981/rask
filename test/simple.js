@@ -21,9 +21,9 @@ var server = rask.server({
         var id = setInterval(function() {
           ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ });
         }, 1000);
-        console.log('started client interval');
+        //console.log('started client interval');
         ws.on('close', function() {
-          console.log('stopping client interval');
+          //console.log('stopping client interval');
           clearInterval(id);
         });
       });
@@ -41,7 +41,6 @@ describe('simpleAndStaticServer', function() {
         .end(function(err, res) {
             if (err) throw err;
             if (res.body === 'world') {
-              console.log(done);
               done();
             } else {
               throw util.format('wrong result: %s', res.body);
