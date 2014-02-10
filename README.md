@@ -47,6 +47,23 @@ log/      <= for log files (auto-create)
 main.js <= app main
 ```
 
+Test
+====
+
+```bash
+cd rask/
+npm install -g mocha
+npm install
+```
+
+Then
+
+```bash
+cd rask/
+mocha # simple test to output to console
+mocha --require blanket -R html-cov >cov.html # coverage test
+```
+
 main.js
 ======
 
