@@ -18,5 +18,14 @@
     "cookie": "~0.1.0",
     "node-json-minify": "~0.1.3-a",
     "ws": "~0.4.31"
+  },
+  "devDependencies": {
+    "blanket": "~1.1.6"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "/lib/",
+      "data-cover-never": "node_modules"
+    }
   }
 }
