@@ -20,7 +20,8 @@
     "ws": "~0.4.31"
   },
   "devDependencies": {
-    "blanket": "~1.1.6"
+    "blanket": "~1.1.6",
+    "supertest": "~0.9.0"
   },
   "config": {
     "blanket": {
