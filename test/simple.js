@@ -4,7 +4,8 @@ var supertest = require('supertest');
 var rask = require('../lib/main.js');
 var server = rask.server({
     serveStatic: true,
-    enableWebSocket: true
+    enableWebSocket: true,
+    enableGzip: true
   })
   .route(function(server) {
       server.get('/hello', function(req, res, next) {
@@ -30,9 +31,9 @@ var server = rask.server({
     })
   .start();
 
-var url = "http://localhost:12345";
+var url = "http://localhost:" + server._bind_port;
 
-describe('simpleAndStaticServer', function() {
+describe('simpleServer', function() {
   describe('testHello', function() {
     it('should get "world" with request "hello"', function(done) {
       supertest(url)
@@ -50,8 +51,6 @@ describe('simpleAndStaticServer', function() {
   });
 
   describe('testSessionRedirect', function() {
-    var mysession = null;
-
     it('should finish without error.', function(done) {
       supertest(url)
         .get('/index.html')
@@ -90,5 +89,10 @@ describe('simpleAndStaticServer', function() {
                 });
           });
     });
+  });
+
+  after(function(done) {
+    server.stop();
+    done();
   });
 });

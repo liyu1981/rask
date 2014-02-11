@@ -2,7 +2,7 @@
   Server configurations.
  */
 {
-  "bind_port": 12345,
+  "bind_port": "random",
   "session_handler": "sessionChecker",
   "bunyan": {
     "name": "base-server",
@@ -16,5 +16,8 @@
   "static": {
     "default": "index.html",
     "directory": "./static"
+  },
+  "auth": {
+    "test": "test"
   }
 }

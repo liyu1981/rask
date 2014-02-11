@@ -19,7 +19,7 @@ var server = rask.server({})
     })
   .start();
 
-var url = "http://localhost:12345";
+var url = "http://localhost:" + server._bind_port;
 
 describe('formJsonClient', function() {
   describe('testNormal', function() {
@@ -84,5 +84,10 @@ describe('formJsonClient', function() {
           }
         });
     });
+  });
+
+  after(function(done) {
+    server.stop();
+    done();
   });
 });
