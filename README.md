@@ -64,6 +64,8 @@ mocha # simple test to output to console
 mocha --require blanket -R html-cov >cov.html # coverage test
 ```
 
+Check current coverage report http://htmlpreview.github.io/?https://github.com/liyu1981/rask/blob/master/cov.html .
+
 main.js
 ======
 
