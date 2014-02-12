@@ -9,7 +9,15 @@ var server = rask.server({
           server.get(/.*/, defaultStaticHandler);
         }
       },
-    enableAuthCheck: true,
+    enableAuthCheck: function(req, res, next) {
+        var a = req.authorization;
+        if (a.scheme === 'Basic' && (a.basic.username in c['auth']) && a.basic.password == c['auth'][a.basic.username]) {
+            next();
+        } else {
+          res.header('WWW-Authenticate', 'Basic realm="' + server.name  + '"');
+          res.send(401, 'Not Authorized.');
+        }
+      },
     enableGzip: true
   })
   .addPreRouteHook(function(req, res, next) {
@@ -22,7 +30,7 @@ var server = rask.server({
     })
   .start();
 
-describe('authCheck', function() {
+describe('customAuthCheck', function() {
   describe('testNormal', function() {
     var url = "http://localhost:" + server._bind_port;
     it('should get exception', function(done) {
