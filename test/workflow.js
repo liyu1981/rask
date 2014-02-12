@@ -21,12 +21,10 @@ function getMockErr(callback) {
   };
 }
 
-var _jury = 100;
-function judge(callback) {
-  var r = _jury;
-  if (r > 50) {
+function judge(jury, callback) {
+  if (jury > 50) {
     callback('D');
-  } else if (r < 10) {
+  } else if (jury < 10) {
     callback('ERR');
   } else {
     callback('C');
@@ -35,7 +33,6 @@ function judge(callback) {
 
 function getAWorkflow(jury) {
   _output = '';
-  _jury = jury;
   var w = WorkflowMgr.newWorkflow({});
   w.def({
     'A': function() {
@@ -46,7 +43,7 @@ function getAWorkflow(jury) {
     'B': function() {
       var self = this;
       output('B');
-      judge(function(nextStep) {
+      judge(jury, function(nextStep) {
           self.goto(nextStep);
         });
     },
@@ -135,6 +132,12 @@ describe('workflow', function() {
         done();
       });
       w.start();
+    });
+  });
+
+  describe('testReap', function() {
+    it('should finish without error.', function() {
+      assert(4, WorkflowMgr.reap());
     });
   });
 });
