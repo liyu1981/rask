@@ -10,6 +10,7 @@ var server = rask.server({
         }
       },
     enableAuthCheck: function(req, res, next) {
+        var c = rask.conf.get();
         var a = req.authorization;
         if (a.scheme === 'Basic' && (a.basic.username in c['auth']) && a.basic.password == c['auth'][a.basic.username]) {
             next();
