@@ -1,29 +1,31 @@
 var util = require('util');
 var supertest = require('supertest');
-
 var rask = require('../lib/main.js');
 
-var server = rask.server({
-    enableAsyncJob: true
-  })
-  .route(function(server) {
-      server.get('/ajob/create', function(req, res, next) {
-          var j = rask.asyncJob.create('testJob', function(done) {
-            setTimeout(function() {
-              done(null, { hello: 'world!' });
-            }, 5000);
-          });
-          j.on('id_assigned', function(id) {
-            res.send(200, { jobId: id });
-          });
-        });
-    })
-  .start();
-
-var url = 'http://localhost:' + server._bind_port;
-
 describe('asyncJob', function() {
+  var server, url;
   this.timeout(20 * 1000);
+
+  before(function(done) {
+    server = rask.server({
+        enableAsyncJob: true
+      })
+      .route(function(server) {
+          server.get('/ajob/create', function(req, res, next) {
+              var j = rask.asyncJob.create('testJob', function(done) {
+                setTimeout(function() {
+                  done(null, { hello: 'world!' });
+                }, 5000);
+              });
+              j.on('id_assigned', function(id) {
+                res.send(200, { jobId: id });
+              });
+            });
+        })
+      .start();
+    url = 'http://localhost:' + server._bind_port;
+    done();
+  });
 
   describe('testNormal', function() {
     it('should finish without error', function(done) {
