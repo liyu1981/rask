@@ -4,6 +4,6 @@
 *.pid
 *.log
 nohup.out
-var/*.sqlite3
+example/var/
 node_modules/
 cov.html

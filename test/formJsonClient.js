@@ -1,27 +1,31 @@
 var util = require('util');
-
 var rask = require('../lib/main.js');
-var server = rask.server({})
-  .route(function(server) {
-      server.post('/login', function(req, res, next) {
-          if (req.body['user'] === 'liyu') {
-            rask.session.createSession(res);
-            res.send(200, { result: 'I\'m in.'});
-          } else if(req.body['user'] === 'nobody') {
-            res.write('{Do not know you.');
-            res.end();
-          } else if(req.body['user'] === 'nobody2'){
-            res.send(401, { code: 10401, message: 'wrong id'});
-          } else {
-            res.send(501);
-          }
-        });
-    })
-  .start();
-
-var url = "http://localhost:" + server._bind_port;
 
 describe('formJsonClient', function() {
+  var server, url;
+
+  before(function(done) {
+    server = rask.server({})
+      .route(function(server) {
+          server.post('/login', function(req, res, next) {
+              if (req.body['user'] === 'liyu') {
+                rask.session.createSession(res);
+                res.send(200, { result: 'I\'m in.'});
+              } else if(req.body['user'] === 'nobody') {
+                res.write('{Do not know you.');
+                res.end();
+              } else if(req.body['user'] === 'nobody2'){
+                res.send(401, { code: 10401, message: 'wrong id'});
+              } else {
+                res.send(501);
+              }
+            });
+        })
+      .start();
+    url = "http://localhost:" + server._bind_port;
+    done();
+  });
+
   describe('testNormal', function() {
     it('should login successful without error', function(done) {
       var c = rask.client.createFormJsonClient({
