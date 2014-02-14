@@ -31,16 +31,32 @@ describe('secureAPI', function() {
   describe('testNormal', function() {
     it('should pass without error.', function(done) {
       supertest(url)
+        .get('/secure/hello?apiKey=jeJFiQxtb8sNaq3dez-2CI9znke7yM1hfD0JDTgaMpmy7k-WR9nBO8bnHG2MORQzNLH-JtojSQLZLiAsWKtetg&command=listISOs&response=json&signature=L1MkCDnzgNPjYrJdtN8DEQq90Q0%3D')
+        .expect(200, done);
+    });
+  });
+
+  describe('testNoApiKey', function() {
+    it('should got 401 without error.', function(done) {
+      supertest(url)
         .get('/secure/hello')
         .expect(401, done);
     });
   });
 
-  describe('test401', function() {
+  describe('testInvalidApiKey', function() {
     it('should got 401 without error.', function(done) {
       supertest(url)
-        .get('/secure/hello?apiKey=jeJFiQxtb8sNaq3dez-2CI9znke7yM1hfD0JDTgaMpmy7k-WR9nBO8bnHG2MORQzNLH-JtojSQLZLiAsWKtetg&command=listISOs&response=json&signature=L1MkCDnzgNPjYrJdtN8DEQq90Q0%3D')
-        .expect(200, done);
+        .get('/secure/hello?apiKey=1234567&signature=3212131231')
+        .expect(401, done);
+    });
+  });
+
+  describe('testInvalidApiKey', function() {
+    it('should got 401 without error.', function(done) {
+      supertest(url)
+        .get('/secure/hello?apiKey=jeJFiQxtb8sNaq3dez-2CI9znke7yM1hfD0JDTgaMpmy7k-WR9nBO8bnHG2MORQzNLH-JtojSQLZLiAsWKtetg&command=listISOs&response=json&signature=hello')
+        .expect(401, done);
     });
   });
 
