@@ -1,6 +1,7 @@
 var util = require('util');
 var supertest = require('supertest');
 var rask = require('../lib/main.js');
+var _ = rask.underscore;
 
 describe('asyncJob', function() {
   var server, url;
@@ -51,6 +52,22 @@ describe('asyncJob', function() {
               }, 7000);
             });
       }, 1000);
+    });
+  });
+
+  describe('testNoParam', function() {
+    it('should return 200 only without error.', function(done) {
+      supertest(url)
+        .get('/asyncJob/query')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) throw err;
+            if (_.isEmpty(res.body)) {
+              done();
+            } else {
+              throw util.format('wrong body:', res.body);
+            }
+          });
     });
   });
 
