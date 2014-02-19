@@ -99,16 +99,6 @@ describe('workflow', function() {
     });
   });
 
-  describe('testDeregister', function() {
-    it('should finish without error.', function(done) {
-      var w = getAWorkflow(7);
-      w.start(null, getMockErr(function(local) {
-        WorkflowMgr.deregister(w.meta._uuid);
-        done();
-      }));
-    })
-  });
-
   describe('testNULL', function() {
     it('should finish without error.', function(done) {
       var w = WorkflowMgr.newWorkflow();
@@ -132,12 +122,6 @@ describe('workflow', function() {
         done();
       });
       w.start();
-    });
-  });
-
-  describe('testReap', function() {
-    it('should finish without error.', function() {
-      assert(4, WorkflowMgr.reap());
     });
   });
 });

@@ -7,3 +7,4 @@ nohup.out
 example/var/
 node_modules/
 cov.html
+var/
