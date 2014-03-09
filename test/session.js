@@ -33,15 +33,14 @@ describe('session', function() {
           break;
         }
       }
-      //console.log('k is:', k);
 
-      setInterval(function() {
-          if (rask.session.findSession(k)) {
-            throw util.format('session key %s still exist', k);
-          } else {
-            done();
-          }
-        }, 3000);
+      setTimeout(function() {
+        if (rask.session.findSession(k)) {
+          throw util.format('session key %s still exist', k);
+        } else {
+          done();
+        }
+      }, 3000);
     });
   });
 
