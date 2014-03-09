@@ -5,6 +5,7 @@ var _ = rask.underscore;
 
 describe('xactJob', function() {
   var server, url;
+  this.timeout(20 * 1000);
 
   before(function(done) {
     server = rask.server({
@@ -69,6 +70,26 @@ describe('xactJob', function() {
                   done();
                 });
             });
+        });
+    });
+  });
+
+  describe('testTimeout', function() {
+    it('should finish without error', function(done) {
+      supertest(url)
+        .get('/ajob/create')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) throw err;
+          var jobId = res.body.jobId;
+          setTimeout(function() {
+          supertest(url)
+            .get('/ajob/hello?jobId=' + jobId)
+            .expect(500)
+            .end(function(err, res) {
+              done();
+            });
+          }, 6000);
         });
     });
   });
