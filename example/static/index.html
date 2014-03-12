@@ -24,12 +24,46 @@
   $(function () {
     var t = $('#time');
     setInterval(function() { t.html((new Date()).toString()); });
+
+    var wsscreen = $('#wsscreen');
+    var socket = window.socket = new WebSocket('ws://' + location.host);
+    socket.onopen = function() {
+      wsscreen.prepend('websocket connected.<br>');
+    };
+    socket.onmessage = function(evt) {
+      wsscreen.prepend('' + evt.data + '<br>');
+    };
+    socket.onclose = function() {
+      wsscreen.prepend('websocket disconnected.<br>');
+    };
+
+    var inputbar = $('#inputbar');
+    $('#sendbtn').click(function() {
+      var t = inputbar.val().trim();
+      if (t.length > 0) {
+        if (t === "stop") {
+          window.socket.close();
+        } else {
+          window.socket.send(t);
+        }
+      }
+    });
   });
 </script>
 
-<div>
-<h1>Hello, world!</h1>
-<p>Now is <span id="time"></span></p>
+<div class="container">
+
+<div class="page-header"><h1>Hello, world!<small>a rask demo.</small></h1></div>
+
+<div class="alert alert-info"><p>Now is <u><span id="time"></span></u></p></div>
+
+<div><pre id="wsscreen" style="min-height: 300px; max-height: 400px; overflow-y: scroll;"></pre></div>
+
+<div class="input-append">
+  <input id="inputbar" class="span11" id="appendedInputButton" type="text">
+  <button id="sendbtn" class="btn" type="button">Send!</button>
+</div>
+
 </div>
 
 </body></html>

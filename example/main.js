@@ -20,6 +20,13 @@ rask.server({
           ws.send(JSON.stringify(process.memoryUsage()), function() { /* ignore errors */ });
         }, 1000);
         console.log('started client interval');
+        ws.on('message', function(message) {
+          if (message === "hello") {
+            ws.send("world! :)");
+          } else {
+            ws.send("you said: " + message);
+          }
+        });
         ws.on('close', function() {
           console.log('stopping client interval');
           clearInterval(id);
