@@ -25,16 +25,18 @@ Usage
 First
 
 ```bash
+cd hellorask
+npm init
 npm install --save git://github.com/liyu1981/rask.git
 ```
 
 Second
 ```bash
-cp -r node_modules/reskeleton/example/* .
+node_modules/rask/bin/rask gen main.js >main.js
 node main.js
 ```
 
-Then goto http://localhost:12345 for the raskapp.
+Then curl http://localhost:12345/hello for "world!".
 
 App dir layout
 ===========
