@@ -4,13 +4,15 @@ var fs = require('fs');
 
 var program = require('commander');
 
+program.option('--dev', 'turn on dev mode');
+
 var cgen =
   program
-    .command('gen <name>')
+    .command('gen <filename>')
     .description('Generate various source templates.');
 
-cgen.action(function(name) {
-  fs.readFile(__dirname + '/assets/' + name + '.js', function(err, data) {
+cgen.action(function(filename) {
+  fs.readFile(__dirname + '/assets/' + filename + (program.dev ? '.dev' : ''), function(err, data) {
     if (err) {
       cgen.outputHelp();
       process.exit(0);
@@ -19,6 +21,24 @@ cgen.action(function(name) {
     }
   });
 });
+
+var ccopyStaticSample =
+  program
+    .command('copy-static-sample')
+    .description('Copy static sample files into current dir.')
+    .action(function() {
+      var self = this;
+      var restart = require('child_process').spawn('cp', ['-rv', __dirname + '/../example/static', './']);
+      restart.stdout.on('data', function (data) {
+        console.log(data.toString());
+      });
+      restart.stderr.on('data', function (data) {
+        console.error(data.toString());
+      });
+      restart.on('close', function (code) {
+        console.log('done with code: ' + code);
+      });
+    });
 
 program.parse(process.argv);
 

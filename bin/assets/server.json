@@ -1,0 +1,16 @@
+{
+  "bind_port": "random",
+  "bunyan": {
+    "name": "base-server",
+    "streams": [
+      {
+      "level": "error",
+      "path": "./log/base-server-error.log"
+    }
+    ]
+  },
+  "static": {
+    "default": "index.html",
+    "directory": "./static"
+  }
+}

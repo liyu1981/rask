@@ -1,0 +1,16 @@
+{
+  "appenders": [
+    {
+      "type": "file",
+      "layout": {
+        "type": "pattern",
+        "pattern": "[%r %p %c] %m"
+      },
+      "filename": "log/run.log",
+      "maxLogSize": 1048576,
+      "backups": 10
+    }
+  ],
+  "replaceConsole": true
+}
+
