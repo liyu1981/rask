@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+
+var program = require('commander');
+
+var cgen =
+  program
+    .command('gen <name>')
+    .description('Generate various source templates.');
+
+cgen.action(function(name) {
+  fs.readFile(__dirname + '/assets/' + name + '.js', function(err, data) {
+    if (err) {
+      cgen.outputHelp();
+      process.exit(0);
+    } else {
+      console.log(data.toString());
+    }
+  });
+});
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}
