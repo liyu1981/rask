@@ -1,4 +1,4 @@
-var rask = require('rask.js');
+var rask = require('rask');
 rask
   .server({
     enableWebSocket: true
