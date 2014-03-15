@@ -12,7 +12,14 @@ var cgen =
     .description('Generate various source templates.');
 
 cgen.action(function(filename) {
-  fs.readFile(__dirname + '/assets/' + filename + (program.dev ? '.dev' : ''), function(err, data) {
+  var hasDev = (function() {
+    if (program.dev && fs.existsSync(__dirname + '/assets/' + filename + '.dev')) {
+      return '.dev';
+    } else {
+      return '';
+    }
+  })();
+  fs.readFile(__dirname + '/assets/' + filename + hasDev, function(err, data) {
     if (err) {
       cgen.outputHelp();
       process.exit(0);
