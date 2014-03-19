@@ -50,48 +50,39 @@ describe('xactJob', function() {
     done();
   });
 
-  describe('testNormal', function() {
-    it('should finish without error', function(done) {
-      supertest(url)
-        .get('/ajob/create')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) throw err;
-          var jobId = res.body.jobId;
-          supertest(url)
-            .get('/ajob/hello?jobId=' + jobId)
-            .expect(200)
-            .end(function(err, res) {
-              supertest(url)
-                .get('/ajob/finish?jobId=' + jobId)
-                .expect(200)
-                .end(function(err, res) {
-                  if (err) throw err;
-                  done();
-                });
-            });
-        });
-    });
+  it('should finish without error', function(done) {
+    supertest(url)
+      .get('/ajob/create')
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw err;
+        var jobId = res.body.jobId;
+        supertest(url)
+          .get('/ajob/hello?jobId=' + jobId)
+          .expect(200)
+          .end(function(err, res) {
+            supertest(url)
+              .get('/ajob/finish?jobId=' + jobId)
+              .expect(200)
+              .end(done);
+          });
+      });
   });
 
-  describe('testTimeout', function() {
-    it('should finish without error', function(done) {
-      supertest(url)
-        .get('/ajob/create')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) throw err;
-          var jobId = res.body.jobId;
-          setTimeout(function() {
-          supertest(url)
-            .get('/ajob/hello?jobId=' + jobId)
-            .expect(500)
-            .end(function(err, res) {
-              done();
-            });
-          }, 6000);
-        });
-    });
+  it('should timeout without error', function(done) {
+    supertest(url)
+      .get('/ajob/create')
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw err;
+        var jobId = res.body.jobId;
+        setTimeout(function() {
+        supertest(url)
+          .get('/ajob/hello?jobId=' + jobId)
+          .expect(500)
+          .end(done);
+        }, 6000);
+      });
   });
 
   after(function(done) {
