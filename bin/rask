@@ -49,17 +49,5 @@ var ccopyStaticSample =
 
 program.parse(process.argv);
 
-// check miss hit of subcommand
-// console.log(result);
-var subCommandExist = (function(a, f) {
-  for (var i=0; i<a.length; i++) {
-    if (f(a[i])) {
-      return i;
-    }
-  }
-})(program.commands, function(elem) { return elem._name === result.args[0]; });
-
-if(!subCommandExist || !program.args.length) {
-  program.help();
-}
-
+// if reach here, sth should be wrong and not handled, print help
+program.help();
