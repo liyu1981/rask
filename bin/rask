@@ -47,19 +47,20 @@ var ccopyStaticSample =
       });
     });
 
-program.parse(process.argv);
+var result = program.parse(process.argv);
 
-// check miss hit of subcommand
-// console.log(result);
-var subCommandExist = (function(a, f) {
-  for (var i=0; i<a.length; i++) {
-    if (f(a[i])) {
-      return i;
-    }
+// Check whether we have at least one subcmd found.
+//
+// Sadly currently we have to do in this vague way: checking the result.args array
+// for object. This method is got by observing console.log(result). Maybe there is
+// better way out there.
+var foundCmd = false;
+for (var i=0; i<result.args.length; i++) {
+  if (typeof result.args[i] === 'object') {
+    foundCmd = true;
   }
-})(program.commands, function(elem) { return elem._name === result.args[0]; });
-
-if(!subCommandExist || !program.args.length) {
-  program.help();
 }
 
+if (!foundCmd || !result.args.length) {
+  program.help();
+}
