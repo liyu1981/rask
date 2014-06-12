@@ -47,7 +47,20 @@ var ccopyStaticSample =
       });
     });
 
-program.parse(process.argv);
+var result = program.parse(process.argv);
 
-// if reach here, sth should be wrong and not handled, print help
-program.help();
+// Check whether we have at least one subcmd found.
+//
+// Sadly currently we have to do in this vague way: checking the result.args array
+// for object. This method is got by observing console.log(result). Maybe there is
+// better way out there.
+var foundCmd = false;
+for (var i=0; i<result.args.length; i++) {
+  if (typeof result.args[i] === 'object') {
+    foundCmd = true;
+  }
+}
+
+if (!foundCmd || !result.args.length) {
+  program.help();
+}
