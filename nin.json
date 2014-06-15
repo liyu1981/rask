@@ -1,0 +1,8 @@
+{
+  "actions": [
+    {
+      "type": "bash",
+      "content": "nin.sh"
+    }
+  ]
+}
