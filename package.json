@@ -6,8 +6,19 @@
     "node": "0.10.5",
     "npm": "1.2.18"
   },
-  "private": true,
-  "main": "lib/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:liyu1981/rask.git"
+  },
+  "keywords": [
+    "restify",
+    "framework"
+  ],
+  "author": "LI, Yu",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/liyu1981/rask/issues"
+  },
   "dependencies": {
     "log4js": "~0.6.9",
     "underscore": "~1.5.2",
