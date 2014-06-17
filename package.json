@@ -19,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/liyu1981/rask/issues"
   },
+  "main": "lib/main.js",
   "dependencies": {
     "log4js": "~0.6.9",
     "underscore": "~1.5.2",
