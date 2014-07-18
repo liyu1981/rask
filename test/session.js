@@ -1,4 +1,5 @@
 var util = require('util');
+var assert = require('assert');
 var supertest = require('supertest');
 var rask = require('../lib/main.js');
 
@@ -14,6 +15,10 @@ describe('session', function() {
           res.write('I\'m in.');
           res.end();
         });
+        server.get('/logout', function(req, res, next) {
+          rask.session.removeSession(req, res);
+          res.send(200);
+        })
       })
       .start();
 
@@ -41,6 +46,33 @@ describe('session', function() {
           done();
         }
       }, 3000);
+    });
+  });
+
+  it('should remove session without error', function(done) {
+    supertest(url).get('/login').expect(200).end(function(err, res) {
+      // got the session server given
+      var k = null;
+      var sc = null;
+      var s = res.headers['set-cookie'];
+      for (var i=0; i<s.length; i++) {
+        if(/rask-session=/.test(s[i])) {
+          sc = s[i];
+          k = s[i].slice(13);
+          break;
+        }
+      }
+      supertest(url)
+        .get('/logout')
+        .set('Cookie', sc)
+        .expect(200)
+        .end(function(err, res) {
+          if (rask.session.findSession(k)) {
+            throw util.format('session key %s still exist', k);
+          } else {
+            done();
+          }
+        });
     });
   });
 
