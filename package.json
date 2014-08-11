@@ -21,17 +21,17 @@
   },
   "main": "lib/main.js",
   "dependencies": {
-    "log4js": "~0.6.9",
-    "underscore": "~1.5.2",
-    "bunyan": "~0.22.0",
-    "restify": "2.6.0",
+    "bunyan": "~0.22.3",
+    "commander": "~2.3.0",
+    "cookie": "~0.1.2",
     "hashtable": "~0.1.4",
-    "node-uuid": "~1.4.1",
-    "cookie": "~0.1.0",
+    "log4js": "~0.6.16",
+    "nedb": "~0.10.7",
     "node-json-minify": "~0.1.3-a",
-    "ws": "~0.4.31",
-    "nedb": "~0.10.3",
-    "commander": "~2.1.0"
+    "node-uuid": "~1.4.1",
+    "restify": "~2.8.2",
+    "underscore": "~1.5.2",
+    "ws": "~0.4.32"
   },
   "devDependencies": {
     "blanket": "~1.1.6",
