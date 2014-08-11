@@ -40,6 +40,16 @@ describe('simpleServer', function() {
     done();
   });
 
+  it('should pong without error', function(done) {
+    supertest(url)
+      .get('/ping')
+      .expect(200)
+      .end(function(err, res) {
+        assert.equal('pong', res.body);
+        done();
+      });
+  });
+
   it('should get "world" with request "hello"', function(done) {
     supertest(url)
       .get('/hello')
