@@ -24,7 +24,7 @@
     "bunyan": "~0.22.3",
     "commander": "~2.3.0",
     "cookie": "~0.1.2",
-    "hashtable": "~0.4.1",
+    "hashtable": "~0.4.3",
     "log4js": "~0.6.16",
     "nedb": "~0.10.7",
     "node-json-minify": "~0.1.3-a",
